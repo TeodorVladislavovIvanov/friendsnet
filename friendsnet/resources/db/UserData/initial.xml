@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<User_Data id="1" username="Teo" date_quit_smoking="2010-05-15"
+		avg_cigarette_day="18" cigarette_pack_price="4.50" smoker_since="2005-01-15" />
+	<User_Data id="2" username="Kike" date_quit_smoking="2008-07-10"
+		avg_cigarette_day="19" cigarette_pack_price="5.80" smoker_since="2004-04-05" />
+</dataset>
