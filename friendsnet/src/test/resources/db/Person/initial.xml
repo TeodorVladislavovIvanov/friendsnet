@@ -2,7 +2,7 @@
 <dataset>
   <person_table person_id="1" name="Teodor" surname="ivanov"/>
   <person_table person_id="2" name="angel" surname="lenovo"/>
-  
+  <!--  
   <event_table event_id="3" name="event1" startingDate="2010-05-15" endDate="2010-05-20" type="PARTY" />
   <event_table event_id="4" name="event2" startingDate="2011-05-15" endDate="2011-05-20" type="GENERAL" />
   
@@ -29,5 +29,5 @@
   
   <Likes_Posts post_id="5" like_id="9"/>
   <Likes_Posts post_id="6" like_id="10"/>
-  
+  -->
 </dataset>
