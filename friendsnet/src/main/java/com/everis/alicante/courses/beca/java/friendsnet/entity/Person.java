@@ -2,15 +2,14 @@ package com.everis.alicante.courses.beca.java.friendsnet.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -28,24 +27,13 @@ public class Person implements FNEntity{
 	private String name;
 	private String surname;
 	
-	/*@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="Persons_Persons", joinColumns = {@JoinColumn(name = "person_id")}, inverseJoinColumns = {@JoinColumn(name = "person_id")})
-	private List<Person> persons;
-	*/
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="Events_Persons", joinColumns = {@JoinColumn(name = "event_id")}, inverseJoinColumns = {@JoinColumn(name = "person_id")})
-	private List<Event> events;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="Groups_Persons", joinColumns = {@JoinColumn(name = "group_id")}, inverseJoinColumns = {@JoinColumn(name = "person_id")})
-	private List<Group> groups;
+	@ManyToOne
+    private Person friend;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="person")
-	private List<Like> likes;
+	@OneToMany(mappedBy = "friend", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Person> persons;
 	
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="Posts_Persons", joinColumns = {@JoinColumn(name = "post_id")}, inverseJoinColumns = {@JoinColumn(name = "person_id")})
-	private List<Post> posts;
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Group> groups;
 	
 }

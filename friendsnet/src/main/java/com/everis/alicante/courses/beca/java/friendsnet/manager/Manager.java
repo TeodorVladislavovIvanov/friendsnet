@@ -2,19 +2,19 @@ package com.everis.alicante.courses.beca.java.friendsnet.manager;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.FNEntity;
 
-public interface Manager<T extends FNEntity> {
+public interface Manager<T extends FNEntity, ID> {
 	
 	Iterable<T> findAll();
-	T findById(Long id);
+	T findById(ID id);
 	
-	void save(T objeto);
+	T save(T objeto);
 	
-	void save(Iterable<T>objeto);
+	Iterable<T> save(Iterable<T>objeto);
 	
-	void update(T objeto);
+	T update(T objeto);
 	
-	void update(Iterable<T> objeto);
+	Iterable<T> update(Iterable<T> objeto);
 	
-	void delete(T objeto);
+	void delete(ID id);
 
 }

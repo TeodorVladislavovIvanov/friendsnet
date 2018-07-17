@@ -13,7 +13,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.everis.alicante.courses.beca.java.friendsnet.dao.EventRepository;
+import com.everis.alicante.courses.beca.java.friendsnet.dao.EventDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -27,7 +27,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 public class EventRepositoryIT {
 
 	@Autowired
-	private EventRepository repository;
+	private EventDao repository;
 	
 	@Test
 	@DatabaseSetup("/db/Person/initial.xml")

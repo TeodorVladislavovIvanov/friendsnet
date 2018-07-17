@@ -2,6 +2,7 @@ package com.everis.alicante.courses.beca.java.friendsnet.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import lombok.Data;
 
@@ -29,10 +32,8 @@ public class Event implements FNEntity{
 	private Date endDate;
 	private EventType type;
 	
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="events", cascade=CascadeType.ALL)
-	private List<Person> persons;
 	
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="events", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Post> posts;
 	
 }

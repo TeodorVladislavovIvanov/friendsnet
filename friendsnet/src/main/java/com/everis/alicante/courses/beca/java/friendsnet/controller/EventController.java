@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.EventDto;
-import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PostDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
 

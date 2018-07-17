@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
 
-public interface LikeRepository extends CrudRepository<Like, Long>{
+public interface LikeDao extends CrudRepository<Like, Long>{
 
 }
