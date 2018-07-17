@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.beca.java.friendsnet.persistence.repository;
+package com.everis.alicante.courses.beca.java.friendsnet.dao;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.everis.alicante.courses.beca.java.friendsnet.dao.EventDao;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
+import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
@@ -24,20 +24,28 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
-public class EventRepositoryIT {
-
+public class PersonDaoIT {
+	
 	@Autowired
-	private EventDao repository;
+	private PersonDao repository;
 	
 	@Test
 	@DatabaseSetup("/db/Person/initial.xml")
     public void testFindAll() {
 		//Act
-		final List<Event> all = (List<Event>) repository.findAll();
+		final List<Person> all = (List<Person>) repository.findAll();
 				
 		//Assert
 		Assert.assertEquals(2, all.size());
-	} 
-	
-	
+	}  
+
+	@Test
+    @DatabaseSetup("/db/Person/initial.xml")
+    public void testDelete() {
+        // Act
+        repository.deleteById(1L);
+
+        // Assert
+       Assert.assertTrue(repository.findById(1L).get().isDeleted());
+    }
 }

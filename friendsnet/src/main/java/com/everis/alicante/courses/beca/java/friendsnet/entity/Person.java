@@ -9,14 +9,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name ="person_table")
 public class Person implements FNEntity{
 	
@@ -27,11 +29,14 @@ public class Person implements FNEntity{
 	private String name;
 	private String surname;
 	
-	@ManyToOne
-    private Person friend;
+	@Column(name="is_deleted")
+	private boolean isDeleted;
+	 
+	@ManyToMany(fetch = FetchType.LAZY)
+    private List<Person> friends;
 	
-	@OneToMany(mappedBy = "friend", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Person> persons;
+	@ManyToMany(mappedBy = "friends", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Person> friends_1;
 	
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Group> groups;

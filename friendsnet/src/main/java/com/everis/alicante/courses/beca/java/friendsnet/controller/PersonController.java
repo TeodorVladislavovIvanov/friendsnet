@@ -28,8 +28,9 @@ public class PersonController {
 	@GetMapping("/")
 	public List<Person> findAll(){
 		return (List<Person>) mapper.map(manager.findAll(), PersonDto.class);
+		
 	}
-	
+
 	@GetMapping("/{id}")
 	public PersonDto findById(@PathVariable("id")Long id) {
 		return mapper.map(manager.findById(id), PersonDto.class);

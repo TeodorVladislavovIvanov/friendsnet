@@ -25,7 +25,7 @@ public class PersonManagerImpl implements PersonManager{
 	@Override
 	public Person save(Person person) {
 		return dao.save(person);
-	}
+	} 
 
 	@Override
 	public Iterable<Person> save(Iterable<Person> persons) {
@@ -46,7 +46,7 @@ public class PersonManagerImpl implements PersonManager{
 
 	@Override
 	public void delete(Long id) {
-		dao.deleteById(id);	
+		dao.deleteById(id);
 	}
 
 	@Override
