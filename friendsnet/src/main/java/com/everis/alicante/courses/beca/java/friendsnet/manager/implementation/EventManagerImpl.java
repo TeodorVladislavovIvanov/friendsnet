@@ -54,7 +54,8 @@ public class EventManagerImpl implements EventManager{
 	public void delete(Long id) {
 		dao.deleteById(id);
 	}
-	// Falta cosas
+
+	@Override
 	public Event addPerson(Long id, Long idPerson) {
 		Event event = dao.findById(id).orElse(null);
 		if (null != event) {
@@ -68,6 +69,5 @@ public class EventManagerImpl implements EventManager{
 		return dao.save(event);
 	}
 
-	
 
 }

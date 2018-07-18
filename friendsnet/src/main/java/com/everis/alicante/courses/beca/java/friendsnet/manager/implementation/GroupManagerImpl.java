@@ -1,5 +1,7 @@
 package com.everis.alicante.courses.beca.java.friendsnet.manager.implementation;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +51,11 @@ public class GroupManagerImpl implements GroupManager{
 		dao.deleteById(id);
 	}
 
-	//Falta por hacer
+	//Hay que probarlo
 	@Override
-	public Group addPersons(Group group, Iterable<Person> persons) {
-		// TODO Auto-generated method stub
-		return null;
+	public Group addPersons(Group group, Set<Person> persons) {
+		group.getPersonsGroup().addAll(persons);
+		 return group;
 	}
 
 	

@@ -50,12 +50,11 @@ public class PersonManagerImpl implements PersonManager{
 		dao.deleteById(id);
 	}
 
-	// Falta por terminar
 	@Override
 	public Person relatePersons(Long personId, Iterable<Long> persons) {
 		Person person = dao.findById(personId).get();
 		List<Person> friends = (List<Person>) dao.findAllById(persons);
-		//person.getFriends().addAll(friends);
+		person.getFriends().addAll(friends);
 		dao.saveAll(friends);
 		return person;
 	}

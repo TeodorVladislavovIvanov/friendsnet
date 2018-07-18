@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.EventDto;
+import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PersonDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
 
 @RestController
@@ -59,5 +61,12 @@ public class EventController {
 	public void remove(@PathVariable Long id) {
 		manager.delete(id);
 	}
+	
+	//necesito probar
+	@PostMapping("/{id}/relate")
+	public EventDto relate(@PathVariable Long id, @PathVariable Long personid) {
+		return mapper.map(manager.addPerson(id, personid), EventDto.class);
+	}
+	
 
 }
