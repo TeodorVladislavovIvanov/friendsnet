@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.java.friendsnet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -22,22 +23,32 @@ public class PersonController {
 
 	@Autowired
 	private PersonManager manager;
-	
-	@Autowired
-    private DozerBeanMapper mapper;
-	
 
-	@SuppressWarnings("unchecked")
+	@Autowired
+	private DozerBeanMapper mapper;
+
 	@GetMapping("/")
-	public List<Person> findAll(){
-		return (List<Person>) mapper.map(manager.findAll(), PersonDto.class);
+	public List<PersonDto> findAll() {
+		return (List<PersonDto>) this.convertToDTO((List<Person>) manager.findAll());
+	}
+
+	protected List<PersonDto> convertToDTO(List<Person> listaPersonas) {
+		final List<PersonDto> list = new ArrayList<>();
+		for (Person p : listaPersonas) {
+			list.add(this.convertToDTO(p));
+		}
+		return list;
+	}
+
+	protected PersonDto convertToDTO(Person p) {
+		return mapper.map(p, PersonDto.class);
 	}
 
 	@GetMapping("/{id}")
-	public PersonDto findById(@PathVariable("id")Long id) {
+	public PersonDto findById(@PathVariable("id") Long id) {
 		return mapper.map(manager.findById(id), PersonDto.class);
 	}
-	
+
 	@PostMapping
 	public PersonDto create(@RequestBody Person person) {
 		return mapper.map(manager.save(person), PersonDto.class);

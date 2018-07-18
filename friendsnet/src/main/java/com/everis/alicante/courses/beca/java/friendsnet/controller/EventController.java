@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.java.friendsnet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -27,10 +28,21 @@ public class EventController {
     private DozerBeanMapper mapper;
 	
 
-	@SuppressWarnings("unchecked")
 	@GetMapping("/")
-	public List<Event> findAll(){
-		return (List<Event>) mapper.map(manager.findAll(), EventDto.class);
+	public List<EventDto> findAll(){
+		return (List<EventDto>) this.convertToDTO((List<Event>) manager.findAll());
+	}
+
+	protected List<EventDto> convertToDTO(List<Event> listaEvents) {
+		final List<EventDto> list = new ArrayList<>();
+		for (Event e : listaEvents) {
+			list.add(this.convertToDTO(e));
+		}
+		return list;
+	}
+
+	protected EventDto convertToDTO(Event e) {
+		return mapper.map(e, EventDto.class);
 	}
 	
 	@GetMapping("/{id}")

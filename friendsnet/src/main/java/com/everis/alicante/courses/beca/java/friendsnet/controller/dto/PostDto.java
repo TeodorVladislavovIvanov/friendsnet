@@ -1,11 +1,9 @@
 package com.everis.alicante.courses.beca.java.friendsnet.controller.dto;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.PostType;
 
 import lombok.Data;
@@ -17,10 +15,6 @@ public class PostDto {
 	private String text;
 	private Date CreationDate;
 	private PostType type;
-	
-	private List<Event> events;
-	
-	private List<Person> persons;
-	
-	private List<Like> likes;
+	private Set<LikeDto> likes = new HashSet<>();
+	private PersonDto person;
 }

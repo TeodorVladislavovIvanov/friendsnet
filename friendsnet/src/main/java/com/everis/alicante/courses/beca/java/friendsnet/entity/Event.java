@@ -35,6 +35,7 @@ public class Event implements FNEntity{
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	private EventType type;
+	private Byte[] picture;
 
 
 	@OneToMany(fetch = FetchType.LAZY)

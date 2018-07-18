@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.java.friendsnet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -27,10 +28,22 @@ public class GroupController {
     private DozerBeanMapper mapper;
 	
 
-	@SuppressWarnings("unchecked")
+	
 	@GetMapping("/")
-	public List<Group> findAll(){
-		return (List<Group>) mapper.map(manager.findAll(), GroupDto.class);
+	public List<GroupDto> findAll(){
+		return (List<GroupDto>) this.convertToDTO((List<Group>) manager.findAll());
+	}
+	
+	protected List<GroupDto> convertToDTO(List<Group> listaGroups) {
+		final List<GroupDto> list = new ArrayList<>();
+		for (Group g : listaGroups) {
+			list.add(this.convertToDTO(g));
+		}
+		return list;
+	}
+
+	protected GroupDto convertToDTO(Group g) {
+		return mapper.map(g, GroupDto.class);
 	}
 	
 	@GetMapping("/{id}")

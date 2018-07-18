@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.java.friendsnet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -27,10 +28,22 @@ public class PostController {
     private DozerBeanMapper mapper;
 	
 
-	@SuppressWarnings("unchecked")
+	
 	@GetMapping("/")
-	public List<Post> findAll(){
-		return (List<Post>) mapper.map(manager.findAll(), PostDto.class);
+	public List<PostDto> findAll(){
+		return (List<PostDto>) this.convertToDTO((List<Post>) manager.findAll());
+	}
+	
+	protected List<PostDto> convertToDTO(List<Post> listaPosts) {
+		final List<PostDto> list = new ArrayList<>();
+		for (Post p : listaPosts) {
+			list.add(this.convertToDTO(p));
+		}
+		return list;
+	}
+
+	protected PostDto convertToDTO(Post p) {
+		return mapper.map(p, PostDto.class);
 	}
 	
 	@GetMapping("/{id}")
@@ -58,6 +71,6 @@ public class PostController {
 			}
 		}
 		return listDTO;
-	}
-	*/
+	}*/
+	
 }
