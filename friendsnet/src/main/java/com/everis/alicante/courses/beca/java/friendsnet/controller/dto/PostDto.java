@@ -6,9 +6,11 @@ import java.util.Set;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.PostType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class PostDto {
 
 	private Long id;

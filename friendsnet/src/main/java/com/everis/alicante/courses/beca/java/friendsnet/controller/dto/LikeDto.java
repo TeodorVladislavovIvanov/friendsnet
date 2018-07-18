@@ -4,9 +4,11 @@ import java.util.Date;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.LikeType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class LikeDto {
 	private Long id;
 	private Date creationDate;

@@ -1,11 +1,14 @@
 package com.everis.alicante.courses.beca.java.friendsnet.manager.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.java.friendsnet.dao.EventDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
 
@@ -56,18 +59,16 @@ public class EventManagerImpl implements EventManager{
 	}
 
 	@Override
-	public Event addPerson(Long id, Long idPerson) {
+	public Event addPerson(Long id, Long personsid) {
 		Event event = dao.findById(id).orElse(null);
-		if (null != event) {
-			Person person = personDao.findById(id).orElse(null);
-			if (null != person) {
-				event.getPersonsEvent().add(person);
-				person.getEvents().add(event);
-				personDao.save(person);
-			}
+		if (event != null) {
+			Person person = personDao.findById(personsid).get();
+				if (person != null) {
+					event.getPersonsEvent().add(person);
+					person.getEvents().add(event);
+					personDao.save(person);
+				}
 		}
 		return dao.save(event);
 	}
-
-
 }
