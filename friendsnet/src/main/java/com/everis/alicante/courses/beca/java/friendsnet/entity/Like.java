@@ -13,10 +13,12 @@ import javax.persistence.Table;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.LikeType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name ="like_table")
 public class Like implements FNEntity {
 

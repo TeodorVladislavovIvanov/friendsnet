@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.EventDto;
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.GroupDto;
+import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PersonDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
 
@@ -61,5 +63,10 @@ public class GroupController {
 		manager.delete(id);
 	}
 	
-	//Faltan hacer el relatey getpersonbyID
+	@PostMapping("/{id}/relate")
+	public GroupDto relate(@PathVariable Long id, @RequestBody List<Long> persons) {
+		return mapper.map(manager.addPersons(id, persons), GroupDto.class);
+	}
+	
+	// getpersonbyID
 }

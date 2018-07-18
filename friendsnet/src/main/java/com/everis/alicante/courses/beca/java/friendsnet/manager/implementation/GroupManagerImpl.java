@@ -1,11 +1,12 @@
 package com.everis.alicante.courses.beca.java.friendsnet.manager.implementation;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.java.friendsnet.dao.GroupDao;
+import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
@@ -14,7 +15,10 @@ import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
 public class GroupManagerImpl implements GroupManager{
 	
 	@Autowired
-	GroupDao dao;
+	private GroupDao dao;
+	
+	@Autowired
+	private PersonDao personDao;
 
 	@Override
 	public Iterable<Group> findAll() {
@@ -51,15 +55,19 @@ public class GroupManagerImpl implements GroupManager{
 		dao.deleteById(id);
 	}
 
-	//Hay que probarlo
 	@Override
-	public Group addPersons(Group group, Set<Person> persons) {
-		group.getPersonsGroup().addAll(persons);
-		 return group;
+	public Group addPersons(Long groupid, Iterable<Long> personsid) {
+		Group group = dao.findById(groupid).orElse(null);
+		if (group != null) {
+			List<Person> aux = (List<Person>) personDao.findAllById(personsid);
+			for (Person person : aux) {
+				if (person != null) {
+					group.getPersonsGroup().add(person);
+					person.getGroups().add(group);
+					personDao.save(person);
+				}
+			}
+		}
+		return dao.save(group);
 	}
-
-	
-
-	
-
 }

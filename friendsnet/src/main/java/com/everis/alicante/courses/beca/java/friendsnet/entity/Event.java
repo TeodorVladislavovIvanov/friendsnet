@@ -18,10 +18,12 @@ import javax.persistence.TemporalType;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.EventType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name ="event_table")
 public class Event implements FNEntity{
 

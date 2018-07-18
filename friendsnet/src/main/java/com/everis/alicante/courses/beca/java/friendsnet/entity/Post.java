@@ -17,10 +17,12 @@ import javax.persistence.Table;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.PostType;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name ="post_table")
 public class Post implements FNEntity{
 

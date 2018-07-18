@@ -16,7 +16,7 @@ public class EventManagerImpl implements EventManager{
 	EventDao dao;
 	
 	@Autowired
-	private PersonDao personDAO;
+	private PersonDao personDao;
 	
 
 	@Override
@@ -59,11 +59,11 @@ public class EventManagerImpl implements EventManager{
 	public Event addPerson(Long id, Long idPerson) {
 		Event event = dao.findById(id).orElse(null);
 		if (null != event) {
-			Person person = personDAO.findById(id).orElse(null);
+			Person person = personDao.findById(id).orElse(null);
 			if (null != person) {
 				event.getPersonsEvent().add(person);
 				person.getEvents().add(event);
-				personDAO.save(person);
+				personDao.save(person);
 			}
 		}
 		return dao.save(event);
