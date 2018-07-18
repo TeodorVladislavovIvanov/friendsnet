@@ -6,7 +6,7 @@ import java.util.List;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.PostType;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.PostType;
 
 import lombok.Data;
 

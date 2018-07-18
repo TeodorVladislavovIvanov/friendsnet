@@ -35,15 +35,13 @@ public class PostManagerImpl implements PostManager {
 	}
 
 	@Override
-	public Post update(Post objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post update(Post post) {
+		return dao.save(post);
 	}
 
 	@Override
-	public Iterable<Post> update(Iterable<Post> objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Post> update(Iterable<Post> posts) {
+		return dao.saveAll(posts);
 	}
 
 	@Override
@@ -52,9 +50,8 @@ public class PostManagerImpl implements PostManager {
 	}
 
 	@Override
-	public Post addLike(Like like) {
-		return null;
+	public Post addLike(Long id, Like like) {
+		return dao.addLike(id, like);
 	}
-
 
 }

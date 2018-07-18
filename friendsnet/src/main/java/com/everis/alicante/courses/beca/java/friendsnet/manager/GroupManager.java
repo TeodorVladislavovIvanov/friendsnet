@@ -5,5 +5,5 @@ import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 
 public interface GroupManager extends Manager<Group,Long>{
 
-	Person addPerson(Iterable<Person> persons);
+	Group addPersons(Group group, Iterable<Person> persons);
 }

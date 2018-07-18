@@ -35,15 +35,13 @@ public class GroupManagerImpl implements GroupManager{
 	}
 
 	@Override
-	public Group update(Group objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Group update(Group group) {
+		return dao.save(group);
 	}
 
 	@Override
-	public Iterable<Group> update(Iterable<Group> objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Group> update(Iterable<Group> groups) {
+		return dao.saveAll(groups);
 	}
 
 	@Override
@@ -51,10 +49,14 @@ public class GroupManagerImpl implements GroupManager{
 		dao.deleteById(id);
 	}
 
+	//Falta por hacer
 	@Override
-	public Person addPerson(Iterable<Person> persons) {
-		return  null;
+	public Group addPersons(Group group, Iterable<Person> persons) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 
 	
 

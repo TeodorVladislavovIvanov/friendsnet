@@ -1,17 +1,22 @@
 package com.everis.alicante.courses.beca.java.friendsnet.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.EventType;
 
 import lombok.Data;
 
@@ -22,15 +27,21 @@ public class Event implements FNEntity{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="event_id")
+	@Column(name="eventid")
 	private Long id;
 	private String name;
+	@Temporal(TemporalType.DATE)
 	private Date startingDate;
+	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	private EventType type;
+
+
+	@OneToMany(fetch = FetchType.LAZY)
+	private Set<Post> posts;
 	
-	
-	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Post> posts;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "personid")
+	private Set<Person> personsEvent;
 	
 }

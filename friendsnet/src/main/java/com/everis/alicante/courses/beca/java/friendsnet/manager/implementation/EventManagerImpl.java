@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.java.friendsnet.dao.EventDao;
+import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
 
 @Service
@@ -12,6 +14,9 @@ public class EventManagerImpl implements EventManager{
 	
 	@Autowired
 	EventDao dao;
+	
+	@Autowired
+	private PersonDao personDAO;
 	
 
 	@Override
@@ -31,27 +36,36 @@ public class EventManagerImpl implements EventManager{
 	}
 
 	@Override
-	public Iterable<Event> save(Iterable<Event> objeto) {
-		return  dao.saveAll(objeto);
+	public Iterable<Event> save(Iterable<Event> events) {
+		return  dao.saveAll(events);
 	}
 
 	@Override
-	public Event update(Event objeto) {
-		if(findById(objeto.getId()) == objeto){
-			return objeto;
-		}
-		return dao.save(objeto);
+	public Event update(Event event) {
+	return dao.save(event);
 	}
 
 	@Override
-	public Iterable<Event> update(Iterable<Event> objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Event> update(Iterable<Event> events) {
+		return dao.saveAll(events);
 	}
 
 	@Override
 	public void delete(Long id) {
 		dao.deleteById(id);
+	}
+	// Falta cosas
+	public Event addPerson(Long id, Long idPerson) {
+		Event event = dao.findById(id).orElse(null);
+		if (null != event) {
+			Person person = personDAO.findById(id).orElse(null);
+			if (null != person) {
+				event.getPersonsEvent().add(person);
+				person.getEvents().add(event);
+				personDAO.save(person);
+			}
+		}
+		return dao.save(event);
 	}
 
 	

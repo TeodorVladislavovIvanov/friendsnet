@@ -1,5 +1,7 @@
 package com.everis.alicante.courses.beca.java.friendsnet.manager.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,15 +35,14 @@ public class PersonManagerImpl implements PersonManager{
 	}
 
 	@Override
-	public Person update(Person objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Person update(Person person) {
+		
+		return dao.save(person);
 	}
 
 	@Override
-	public Iterable<Person> update(Iterable<Person> objeto) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Person> update(Iterable<Person> persons) {
+		return dao.saveAll(persons);
 	}
 
 	@Override
@@ -49,10 +50,14 @@ public class PersonManagerImpl implements PersonManager{
 		dao.deleteById(id);
 	}
 
+	// Falta por terminar
 	@Override
-	public Iterable<Person> relatePersons() {
-		return null;
+	public Person relatePersons(Long personId, Iterable<Long> persons) {
+		Person person = dao.findById(personId).get();
+		List<Person> friends = (List<Person>) dao.findAllById(persons);
+		//person.getFriends().addAll(friends);
+		dao.saveAll(friends);
+		return person;
 	}
 
-	
 }
