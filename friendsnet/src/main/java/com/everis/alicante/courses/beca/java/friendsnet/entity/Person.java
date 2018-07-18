@@ -35,12 +35,11 @@ public class Person implements FNEntity{
 	@Column(name="is_deleted")
 	private boolean isDeleted;
 	 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "personId"), inverseJoinColumns = @JoinColumn(name = "friendId"))
 	private Set<Person> persons = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "friendId"), inverseJoinColumns = @JoinColumn(name = "personId"))
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy="persons")
 	private Set<Person> friends;
 	
 	@ManyToMany(mappedBy = "personsGroup", fetch = FetchType.LAZY)

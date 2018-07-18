@@ -11,4 +11,5 @@ public class FriendDto {
 	private String name;
 	private String surname;
 	private Byte[] picture;
+	
 }

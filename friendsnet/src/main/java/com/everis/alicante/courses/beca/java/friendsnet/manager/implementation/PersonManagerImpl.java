@@ -55,6 +55,9 @@ public class PersonManagerImpl implements PersonManager{
 		Person person = dao.findById(personId).get();
 		List<Person> friends = (List<Person>) dao.findAllById(persons);
 		person.getFriends().addAll(friends);
+		for (Person friend : friends) {
+			friend.getFriends().add(person);
+		}
 		dao.saveAll(friends);
 		return person;
 	}

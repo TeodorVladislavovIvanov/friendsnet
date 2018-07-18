@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PersonDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
-import com.everis.alicante.courses.beca.java.friendsnet.manager.PersonManager;
+import com.everis.alicante.courses.beca.java.friendsnet.manager.implementation.PersonManagerImpl;
 
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
 
 	@Autowired
-	private PersonManager manager;
+	private PersonManagerImpl manager;
 
 	@Autowired
 	private DozerBeanMapper mapper;

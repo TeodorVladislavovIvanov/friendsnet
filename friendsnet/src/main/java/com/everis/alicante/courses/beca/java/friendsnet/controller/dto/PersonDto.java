@@ -13,5 +13,5 @@ public class PersonDto {
 	private String name;
 	private String surname;
 	private Byte[] picture;
-	private Set<FriendDto> friendDto;
+	private Set<FriendDto> friends;
 }
