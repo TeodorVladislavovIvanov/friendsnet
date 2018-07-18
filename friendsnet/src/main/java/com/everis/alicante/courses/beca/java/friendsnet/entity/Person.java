@@ -24,7 +24,7 @@ public class Person implements FNEntity{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="person_id")
+	@Column(name="personid")
 	private Long id;
 	private String name;
 	private String surname;

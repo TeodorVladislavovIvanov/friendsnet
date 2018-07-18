@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PostDao;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.PostManager;
 
@@ -48,10 +47,9 @@ public class PostManagerImpl implements PostManager {
 	public void delete(Long id) {
 		dao.deleteById(id);
 	}
-
-	@Override
+/*
 	public Post addLike(Long id, Like like) {
 		return dao.addLike(id, like);
 	}
-
+*/
 }
