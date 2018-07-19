@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.GroupDto;
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PostDto;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.LikeType;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.implementation.PostManagerImpl;
@@ -67,14 +65,14 @@ public class PostController {
 			@PathVariable("liketype") LikeType type) {
 		return mapper.map(manager.addLike(id, idperson, type), PostDto.class);
 	}
-	
+
 	@GetMapping("/persons/{id}")
 	public List<PostDto> findByPersonsId(@PathVariable("id") Long id) {
 		List<Post> posts = manager.findByPersonsId(id);
 		List<PostDto> postsDto = new ArrayList<>();
-			for (Post post : posts) {
-				postsDto.add(mapper.map(post, PostDto.class));
-			}
+		for (Post post : posts) {
+			postsDto.add(mapper.map(post, PostDto.class));
+		}
 		return postsDto;
 	}
 

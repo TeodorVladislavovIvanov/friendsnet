@@ -15,49 +15,49 @@ import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
 public class GroupManagerImpl implements GroupManager {
 
 	@Autowired
-	private GroupDao dao;
+	private GroupDao groupDao;
 
 	@Autowired
 	private PersonDao personDao;
 
 	@Override
 	public Iterable<Group> findAll() {
-		return dao.findAll();
+		return groupDao.findAll();
 	}
 
 	@Override
 	public Group findById(Long id) {
-		return dao.findById(id).get();
+		return groupDao.findById(id).get();
 	}
 
 	@Override
 	public Group save(Group group) {
-		return dao.save(group);
+		return groupDao.save(group);
 	}
 
 	@Override
 	public Iterable<Group> save(Iterable<Group> groups) {
-		return dao.saveAll(groups);
+		return groupDao.saveAll(groups);
 	}
 
 	@Override
 	public Group update(Group group) {
-		return dao.save(group);
+		return groupDao.save(group);
 	}
 
 	@Override
 	public Iterable<Group> update(Iterable<Group> groups) {
-		return dao.saveAll(groups);
+		return groupDao.saveAll(groups);
 	}
 
 	@Override
 	public void delete(Long id) {
-		dao.deleteById(id);
+		groupDao.deleteById(id);
 	}
 
 	@Override
 	public Group addPersons(Long groupid, Iterable<Long> personsid) {
-		Group group = dao.findById(groupid).get();
+		Group group = groupDao.findById(groupid).get();
 		if (group != null) {
 			List<Person> aux = (List<Person>) personDao.findAllById(personsid);
 			for (Person person : aux) {
@@ -68,11 +68,11 @@ public class GroupManagerImpl implements GroupManager {
 				}
 			}
 		}
-		return dao.save(group);
+		return groupDao.save(group);
 	}
 
 	public List<Group> findByPersonsId(Long id) {
-		return dao.findByPersonsId(id);
+		return groupDao.findByPersonsId(id);
 	}
 
 }

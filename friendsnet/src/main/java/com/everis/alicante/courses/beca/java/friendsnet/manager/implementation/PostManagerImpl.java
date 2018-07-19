@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.LikeDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PostDao;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
