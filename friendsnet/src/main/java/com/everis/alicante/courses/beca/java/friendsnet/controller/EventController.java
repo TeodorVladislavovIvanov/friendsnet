@@ -62,11 +62,11 @@ public class EventController {
 		manager.delete(id);
 	}
 	
-	//necesito probar
+	
 	@PostMapping("/{id}/relate")
 	public EventDto relate(@PathVariable Long id, @PathVariable Long personid) {
 		return mapper.map(manager.addPerson(id, personid), EventDto.class);
 	}
 	
-
+// falta el get por el id de persona
 }

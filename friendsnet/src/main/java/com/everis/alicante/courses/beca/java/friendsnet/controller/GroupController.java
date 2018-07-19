@@ -65,6 +65,8 @@ public class GroupController {
 	public GroupDto relate(@PathVariable Long id, @RequestBody List<Long> persons) {
 		return mapper.map(manager.addPersons(id, persons), GroupDto.class);
 	}
+	
+	//me falta este
 	/*
 	@GetMapping("/person/{id}")
 	public List<GroupDto> getByPersonId(@PathVariable("id") Long id) {

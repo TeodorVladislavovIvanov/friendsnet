@@ -14,4 +14,8 @@ public interface PersonDao extends CrudRepository<Person, Long>{
     @Modifying
     @Query("UPDATE Person p SET p.isDeleted = true  WHERE p.id = :id")
     void deleteById(@Param("id") Long personId);
+	
+	@Override
+    @Query("SELECT p FROM Person p WHERE p.isDeleted = false")
+    Iterable<Person> findAll();
 }
