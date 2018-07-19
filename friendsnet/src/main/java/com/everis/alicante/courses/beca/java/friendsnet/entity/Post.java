@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.PostType;
 
@@ -31,6 +33,7 @@ public class Post implements FNEntity{
 	@Column(name = "postid")
 	private Long id;
 	private String text;
+	@Temporal(TemporalType.DATE)
 	private Date CreationDate;
 	private PostType type;
 	private Byte[] picture;
@@ -43,6 +46,6 @@ public class Post implements FNEntity{
 	@JoinColumn(name = "eventid")
 	private Event event;
 	
-	@OneToMany(mappedBy = "likesPost", cascade = {CascadeType.ALL})
+	@OneToMany(mappedBy = "likes", cascade = {CascadeType.ALL})
 	private Set<Like> likes;
 }

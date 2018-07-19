@@ -9,6 +9,7 @@ import com.everis.alicante.courses.beca.java.friendsnet.dao.GroupDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
 
 @Service
@@ -70,4 +71,14 @@ public class GroupManagerImpl implements GroupManager{
 		}
 		return dao.save(group);
 	}
+	/*
+	public List<Group> findByPersonsId(Long id) {
+		final Person person = personDao.findById(id).get();
+		List<Group> groups = null;
+		if (null != person) {
+			groups = dao.findByPersonsId(id);
+		}
+		return groups;
+	}
+*/
 }

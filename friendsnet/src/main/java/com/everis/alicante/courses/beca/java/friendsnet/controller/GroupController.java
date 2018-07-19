@@ -13,18 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.EventDto;
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.GroupDto;
-import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PersonDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
-import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
+import com.everis.alicante.courses.beca.java.friendsnet.manager.implementation.GroupManagerImpl;
 
 @RestController
 @RequestMapping("/groups")
 public class GroupController {
 
 	@Autowired
-	private GroupManager manager;
+	private GroupManagerImpl manager;
 	
 	@Autowired
     private DozerBeanMapper mapper;
@@ -67,6 +65,16 @@ public class GroupController {
 	public GroupDto relate(@PathVariable Long id, @RequestBody List<Long> persons) {
 		return mapper.map(manager.addPersons(id, persons), GroupDto.class);
 	}
-	
-	// getpersonbyID
+	/*
+	@GetMapping("/person/{id}")
+	public List<GroupDto> getByPersonId(@PathVariable("id") Long id) {
+		List<Group> groups = manager.findByPersonsId(id);
+		List<GroupDto> listDto = new ArrayList<>();
+			for (Group group : groups) {
+				listDto.add(mapper.map(group, GroupDto.class));
+			}
+		
+		return listDto;
+	}
+	*/
 }

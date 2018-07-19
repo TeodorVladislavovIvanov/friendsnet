@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PostDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
-import com.everis.alicante.courses.beca.java.friendsnet.manager.PostManager;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.enums.LikeType;
+import com.everis.alicante.courses.beca.java.friendsnet.manager.implementation.PostManagerImpl;
 
 @RestController
 @RequestMapping("/posts")
 public class PostController {
 
 	@Autowired
-	private PostManager manager;
+	private PostManagerImpl manager;
 	
 	@Autowired
     private DozerBeanMapper mapper;
@@ -60,10 +61,16 @@ public class PostController {
 		manager.delete(id);
 	}
 	// Falta hacer getPersonById
+	
+	@PostMapping("/{id}/person/{idperson}/like/{liketype}")
+	public PostDto addLike(@PathVariable("id") Long id, @PathVariable("idperson") Long idperson,
+			@PathVariable("liketype") LikeType type) {
+		return mapper.map(manager.addLike(id, idperson, type), PostDto.class);
+	}
 	/*
 	@GetMapping("/person/{id}")
 	public List<PostDto> getByPersonId(@PathVariable("id") Long id) {
-		List<Post> resultList = manager.findByPersonId(id);
+		List<Post> resultList = (List<Post>) manager.getByPersonId(id);
 		List<PostDto> listDTO = new ArrayList<>();
 		if (null != resultList) {
 			for (Post group : resultList) {

@@ -45,8 +45,8 @@ public class Person implements FNEntity{
 	@ManyToMany(mappedBy = "personsGroup", fetch = FetchType.LAZY)
     private Set<Group> groups;
 	
-	@OneToMany(mappedBy = "likesPerson")
-	private Set<Like> likes;
+	@OneToMany(mappedBy = "person")
+	private Set<Like> like;
 	
 	@OneToMany(mappedBy = "postsPerson")
 	private Set<Post> posts;
