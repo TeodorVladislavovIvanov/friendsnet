@@ -9,15 +9,14 @@ import com.everis.alicante.courses.beca.java.friendsnet.dao.GroupDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.GroupManager;
 
 @Service
-public class GroupManagerImpl implements GroupManager{
-	
+public class GroupManagerImpl implements GroupManager {
+
 	@Autowired
 	private GroupDao dao;
-	
+
 	@Autowired
 	private PersonDao personDao;
 
@@ -58,12 +57,12 @@ public class GroupManagerImpl implements GroupManager{
 
 	@Override
 	public Group addPersons(Long groupid, Iterable<Long> personsid) {
-		Group group = dao.findById(groupid).orElse(null);
+		Group group = dao.findById(groupid).get();
 		if (group != null) {
 			List<Person> aux = (List<Person>) personDao.findAllById(personsid);
 			for (Person person : aux) {
 				if (person != null) {
-					group.getPersonsGroup().add(person);
+					group.getPersons().add(person);
 					person.getGroups().add(group);
 					personDao.save(person);
 				}
@@ -71,14 +70,9 @@ public class GroupManagerImpl implements GroupManager{
 		}
 		return dao.save(group);
 	}
-	/*
+
 	public List<Group> findByPersonsId(Long id) {
-		final Person person = personDao.findById(id).get();
-		List<Group> groups = null;
-		if (null != person) {
-			groups = dao.findByPersonsId(id);
-		}
-		return groups;
+		return dao.findByPersonsId(id);
 	}
-*/
+
 }

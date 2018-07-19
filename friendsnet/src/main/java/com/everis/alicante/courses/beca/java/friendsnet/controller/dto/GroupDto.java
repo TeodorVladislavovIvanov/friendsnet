@@ -14,4 +14,5 @@ public class GroupDto {
 	private String name;
 	private Byte[] picture;
 	private Set<PersonDto> persons = new HashSet<>();
+
 }

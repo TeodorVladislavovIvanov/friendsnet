@@ -14,24 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.EventDto;
-import com.everis.alicante.courses.beca.java.friendsnet.controller.dto.PersonDto;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
-import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
+import com.everis.alicante.courses.beca.java.friendsnet.manager.implementation.EventManagerImpl;
 
 @RestController
 @RequestMapping("/events")
 public class EventController {
 
 	@Autowired
-	private EventManager manager;
-	
+	private EventManagerImpl manager;
+
 	@Autowired
-    private DozerBeanMapper mapper;
-	
+	private DozerBeanMapper mapper;
 
 	@GetMapping("/")
-	public List<EventDto> findAll(){
+	public List<EventDto> findAll() {
 		return (List<EventDto>) this.convertToDTO((List<Event>) manager.findAll());
 	}
 
@@ -46,13 +43,13 @@ public class EventController {
 	protected EventDto convertToDTO(Event e) {
 		return mapper.map(e, EventDto.class);
 	}
-	
+
 	@GetMapping("/{id}")
-	public EventDto findById(@PathVariable("id")Long id) {
+	public EventDto findById(@PathVariable("id") Long id) {
 		return mapper.map(manager.findById(id), EventDto.class);
 	}
-	
-	@PostMapping
+
+	@PostMapping("/")
 	public EventDto create(@RequestBody Event event) {
 		return mapper.map(manager.save(event), EventDto.class);
 	}
@@ -61,12 +58,20 @@ public class EventController {
 	public void remove(@PathVariable Long id) {
 		manager.delete(id);
 	}
-	
-	
-	@PostMapping("/{id}/relate")
-	public EventDto relate(@PathVariable Long id, @PathVariable Long personid) {
+
+	@PostMapping("/persons/{id}/relate")
+	public EventDto addPersonToEventById(@PathVariable Long id, @PathVariable Long personid) {
 		return mapper.map(manager.addPerson(id, personid), EventDto.class);
 	}
-	
-// falta el get por el id de persona
+
+	@GetMapping("/persons/{id}")
+	public List<EventDto> findByPersonsId(@PathVariable("id") Long id) {
+		List<Event> events = manager.findByPersonsId(id);
+		List<EventDto> eventsDto = new ArrayList<>();
+		for (Event event : events) {
+			eventsDto.add(mapper.map(event, EventDto.class));
+		}
+		return eventsDto;
+	}
+
 }

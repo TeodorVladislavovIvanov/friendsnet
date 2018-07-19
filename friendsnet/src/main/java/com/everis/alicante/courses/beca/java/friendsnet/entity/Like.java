@@ -21,21 +21,21 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name ="like_table")
+@Table(name = "like_table")
 public class Like implements FNEntity {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="likeid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "likeid")
 	private Long id;
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	private LikeType type;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "personid")
 	private Person person;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "postid")
 	private Post likes;

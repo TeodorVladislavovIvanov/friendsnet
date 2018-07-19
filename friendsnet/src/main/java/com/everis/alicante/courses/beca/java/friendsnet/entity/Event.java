@@ -24,12 +24,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name ="event_table")
-public class Event implements FNEntity{
+@Table(name = "event_table")
+public class Event implements FNEntity {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="eventid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "eventid")
 	private Long id;
 	private String name;
 	@Temporal(TemporalType.DATE)
@@ -39,12 +39,11 @@ public class Event implements FNEntity{
 	private EventType type;
 	private Byte[] picture;
 
-
 	@OneToMany(fetch = FetchType.LAZY)
 	private Set<Post> posts;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "personid")
 	private Set<Person> personsEvent;
-	
+
 }

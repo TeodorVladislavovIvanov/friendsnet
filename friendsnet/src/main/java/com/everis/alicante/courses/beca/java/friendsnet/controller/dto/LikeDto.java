@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LikeDto {
+	
 	private Long id;
 	private Date creationDate;
 	private LikeType type;

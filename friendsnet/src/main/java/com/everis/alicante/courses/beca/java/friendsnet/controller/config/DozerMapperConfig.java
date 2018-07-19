@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.beca.java.friendsnet;
+package com.everis.alicante.courses.beca.java.friendsnet.controller.config;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;

@@ -8,19 +8,17 @@ import org.springframework.stereotype.Service;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.EventDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
-import com.everis.alicante.courses.beca.java.friendsnet.entity.Group;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.EventManager;
 
 @Service
-public class EventManagerImpl implements EventManager{
-	
+public class EventManagerImpl implements EventManager {
+
 	@Autowired
 	EventDao dao;
-	
+
 	@Autowired
 	private PersonDao personDao;
-	
 
 	@Override
 	public Iterable<Event> findAll() {
@@ -29,7 +27,7 @@ public class EventManagerImpl implements EventManager{
 
 	@Override
 	public Event findById(Long id) {
-		
+
 		return dao.findById(id).get();
 	}
 
@@ -40,12 +38,12 @@ public class EventManagerImpl implements EventManager{
 
 	@Override
 	public Iterable<Event> save(Iterable<Event> events) {
-		return  dao.saveAll(events);
+		return dao.saveAll(events);
 	}
 
 	@Override
 	public Event update(Event event) {
-	return dao.save(event);
+		return dao.save(event);
 	}
 
 	@Override
@@ -58,17 +56,20 @@ public class EventManagerImpl implements EventManager{
 		dao.deleteById(id);
 	}
 
-	@Override
-	public Event addPerson(Long id, Long personsid) {
-		Event event = dao.findById(id).orElse(null);
+	public Event addPerson(Long id, Long personid) {
+		Event event = dao.findById(id).get();
 		if (event != null) {
-			Person person = personDao.findById(personsid).get();
-				if (person != null) {
-					event.getPersonsEvent().add(person);
-					person.getEvents().add(event);
-					personDao.save(person);
-				}
+			Person person = personDao.findById(personid).get();
+			if (person != null) {
+				event.getPersonsEvent().add(person);
+				person.getEvents().add(event);
+				personDao.save(person);
+			}
 		}
 		return dao.save(event);
+	}
+
+	public List<Event> findByPersonsId(Long id) {
+		return dao.findBypersonsEventId(id);
 	}
 }

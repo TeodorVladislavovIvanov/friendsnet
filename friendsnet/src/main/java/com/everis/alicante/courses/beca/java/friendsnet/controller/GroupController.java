@@ -23,17 +23,15 @@ public class GroupController {
 
 	@Autowired
 	private GroupManagerImpl manager;
-	
-	@Autowired
-    private DozerBeanMapper mapper;
-	
 
-	
+	@Autowired
+	private DozerBeanMapper mapper;
+
 	@GetMapping("/")
-	public List<GroupDto> findAll(){
+	public List<GroupDto> findAll() {
 		return (List<GroupDto>) this.convertToDTO((List<Group>) manager.findAll());
 	}
-	
+
 	protected List<GroupDto> convertToDTO(List<Group> listaGroups) {
 		final List<GroupDto> list = new ArrayList<>();
 		for (Group g : listaGroups) {
@@ -45,38 +43,35 @@ public class GroupController {
 	protected GroupDto convertToDTO(Group g) {
 		return mapper.map(g, GroupDto.class);
 	}
-	
+
 	@GetMapping("/{id}")
-	public GroupDto findById(@PathVariable("id")Long id) {
+	public GroupDto findById(@PathVariable("id") Long id) {
 		return mapper.map(manager.findById(id), GroupDto.class);
 	}
-	
+
 	@PostMapping
 	public GroupDto create(@RequestBody Group group) {
-		return mapper.map(manager.save(group),GroupDto.class);
+		return mapper.map(manager.save(group), GroupDto.class);
 	}
 
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
 		manager.delete(id);
 	}
-	
+
 	@PostMapping("/{id}/relate")
 	public GroupDto relate(@PathVariable Long id, @RequestBody List<Long> persons) {
 		return mapper.map(manager.addPersons(id, persons), GroupDto.class);
 	}
-	
-	//me falta este
-	/*
-	@GetMapping("/person/{id}")
-	public List<GroupDto> getByPersonId(@PathVariable("id") Long id) {
+
+	@GetMapping("/persons/{id}")
+	public List<GroupDto> findByPersonsId(@PathVariable("id") Long id) {
 		List<Group> groups = manager.findByPersonsId(id);
-		List<GroupDto> listDto = new ArrayList<>();
-			for (Group group : groups) {
-				listDto.add(mapper.map(group, GroupDto.class));
-			}
-		
-		return listDto;
+		List<GroupDto> groupsDto = new ArrayList<>();
+		for (Group group : groups) {
+			groupsDto.add(mapper.map(group, GroupDto.class));
+		}
+		return groupsDto;
 	}
-	*/
+
 }

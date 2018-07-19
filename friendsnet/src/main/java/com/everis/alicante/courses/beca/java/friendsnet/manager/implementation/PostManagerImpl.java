@@ -1,6 +1,7 @@
 package com.everis.alicante.courses.beca.java.friendsnet.manager.implementation;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.LikeDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PersonDao;
 import com.everis.alicante.courses.beca.java.friendsnet.dao.PostDao;
+import com.everis.alicante.courses.beca.java.friendsnet.entity.Event;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Like;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.entity.Post;
@@ -19,13 +21,13 @@ public class PostManagerImpl implements PostManager {
 
 	@Autowired
 	PostDao postDao;
-	
+
 	@Autowired
 	PersonDao personDao;
-	
+
 	@Autowired
 	LikeDao likeDao;
-	
+
 	@Override
 	public Iterable<Post> findAll() {
 		return postDao.findAll();
@@ -65,19 +67,15 @@ public class PostManagerImpl implements PostManager {
 	public Post addLike(Long postId, Long personId, LikeType likeType) {
 		Post post = postDao.findById(postId).get();
 		Person person = personDao.findById(personId).get();
-		if(post == null && person == null) {
+		if (post == null && person == null) {
 			return post;
-		}
-		else {
+		} else {
 			Like like = likeDao.getByPersonId(personId);
-			if(like != null)
-			{
+			if (like != null) {
 				like.setType(likeType);
 				likeDao.save(like);
-			}
-			else
-			{
-				like = likeCreator(postId,personId,likeType);
+			} else {
+				like = likeCreator(postId, personId, likeType);
 				post.getLikes().add(like);
 				person.getLike().add(like);
 				postDao.save(post);
@@ -85,7 +83,7 @@ public class PostManagerImpl implements PostManager {
 		}
 		return post;
 	}
-	
+
 	protected Like likeCreator(Long idPost, Long idPerson, LikeType likeType) {
 		Like like = new Like();
 		like.setLikes(postDao.findById(idPost).get());
@@ -94,10 +92,9 @@ public class PostManagerImpl implements PostManager {
 		like.setCreationDate(new Date());
 		return like;
 	}
-/*
-	@Override
-	public Iterable<Post> getByPersonId(Long personId) {
-		return postDao.getByPersonId(personId);
+
+	public List<Post> findByPersonsId(Long id) {
+		return postDao.findBypersonPostsId(id);
 	}
-	*/
+
 }

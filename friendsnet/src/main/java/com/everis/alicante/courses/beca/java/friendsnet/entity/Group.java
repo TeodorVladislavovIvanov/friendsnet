@@ -18,17 +18,17 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name ="group_table")
-public class Group implements FNEntity{
-	
+@Table(name = "group_table")
+public class Group implements FNEntity {
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "groupid")
 	private Long id;
 	private String name;
 	private Byte[] picture;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personid")
-    private Set<Person> personsGroup;
+	@JoinColumn(name = "personid")
+	private Set<Person> persons;
 }

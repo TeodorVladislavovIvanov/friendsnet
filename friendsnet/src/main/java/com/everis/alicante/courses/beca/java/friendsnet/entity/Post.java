@@ -25,11 +25,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name ="post_table")
-public class Post implements FNEntity{
+@Table(name = "post_table")
+public class Post implements FNEntity {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "postid")
 	private Long id;
 	private String text;
@@ -37,15 +37,15 @@ public class Post implements FNEntity{
 	private Date CreationDate;
 	private PostType type;
 	private Byte[] picture;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personid")
-    private Person postsPerson;
-	
+	@JoinColumn(name = "personid")
+	private Person personPosts;
+
 	@ManyToOne
 	@JoinColumn(name = "eventid")
 	private Event event;
-	
-	@OneToMany(mappedBy = "likes", cascade = {CascadeType.ALL})
+
+	@OneToMany(mappedBy = "likes", cascade = { CascadeType.ALL })
 	private Set<Like> likes;
 }

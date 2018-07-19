@@ -20,5 +20,5 @@ public class EventDto {
 	private Byte[] picture;
 	private EventType type;
 	private Set<PersonDto> persons = new HashSet<>();
-	
+
 }

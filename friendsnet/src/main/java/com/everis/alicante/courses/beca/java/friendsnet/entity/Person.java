@@ -21,37 +21,37 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name ="person_table")
-public class Person implements FNEntity{
-	
+@Table(name = "person_table")
+public class Person implements FNEntity {
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="personid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "personid")
 	private Long id;
 	private String name;
 	private String surname;
 	private Byte[] picture;
-	
-	@Column(name="is_deleted")
+
+	@Column(name = "is_deleted")
 	private boolean isDeleted;
-	 
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "personId"), inverseJoinColumns = @JoinColumn(name = "friendId"))
 	private Set<Person> persons = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy="persons")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "persons")
 	private Set<Person> friends;
-	
-	@ManyToMany(mappedBy = "personsGroup", fetch = FetchType.LAZY)
-    private Set<Group> groups;
-	
+
+	@ManyToMany(mappedBy = "persons", fetch = FetchType.LAZY)
+	private Set<Group> groups;
+
 	@OneToMany(mappedBy = "person")
 	private Set<Like> like;
-	
-	@OneToMany(mappedBy = "postsPerson")
+
+	@OneToMany(mappedBy = "personPosts")
 	private Set<Post> posts;
-	
+
 	@ManyToMany(mappedBy = "personsEvent", fetch = FetchType.LAZY)
 	private Set<Event> events;
-	
+
 }

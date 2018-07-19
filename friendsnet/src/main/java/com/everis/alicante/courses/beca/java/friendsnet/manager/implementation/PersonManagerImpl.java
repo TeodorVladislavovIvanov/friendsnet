@@ -10,10 +10,11 @@ import com.everis.alicante.courses.beca.java.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.java.friendsnet.manager.PersonManager;
 
 @Service
-public class PersonManagerImpl implements PersonManager{
+public class PersonManagerImpl implements PersonManager {
 
 	@Autowired
 	PersonDao dao;
+
 	@Override
 	public Iterable<Person> findAll() {
 		return dao.findAll();
@@ -27,7 +28,7 @@ public class PersonManagerImpl implements PersonManager{
 	@Override
 	public Person save(Person person) {
 		return dao.save(person);
-	} 
+	}
 
 	@Override
 	public Iterable<Person> save(Iterable<Person> persons) {
@@ -36,7 +37,7 @@ public class PersonManagerImpl implements PersonManager{
 
 	@Override
 	public Person update(Person person) {
-		
+
 		return dao.save(person);
 	}
 
@@ -56,9 +57,10 @@ public class PersonManagerImpl implements PersonManager{
 		List<Person> friends = (List<Person>) dao.findAllById(persons);
 		person.getFriends().addAll(friends);
 		for (Person friend : friends) {
-			friend.getFriends().add(person);
+			friend.getPersons().add(person);
 		}
 		dao.saveAll(friends);
+		dao.save(person);
 		return person;
 	}
 
