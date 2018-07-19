@@ -59,7 +59,7 @@ public class EventController {
 		manager.delete(id);
 	}
 
-	@PostMapping("/persons/{id}/relate")
+	@PostMapping("/{id}/relate/{personid}")
 	public EventDto addPersonToEventById(@PathVariable Long id, @PathVariable Long personid) {
 		return mapper.map(manager.addPerson(id, personid), EventDto.class);
 	}

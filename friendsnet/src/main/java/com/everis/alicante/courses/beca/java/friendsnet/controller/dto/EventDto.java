@@ -19,6 +19,6 @@ public class EventDto {
 	private Date endDate;
 	private Byte[] picture;
 	private EventType type;
-	private Set<PersonDto> persons = new HashSet<>();
+	private Set<PersonDto> personsEvent = new HashSet<>();
 
 }
